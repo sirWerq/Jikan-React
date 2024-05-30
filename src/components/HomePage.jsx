@@ -126,20 +126,28 @@ const HomePage = () => {
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger>
+                                {" "}
                                 <NavLink
-                                  to={`detailsanime/${data.mal_id}`}
+                                  to={`/detailsanime/${data.mal_id}`}
                                 >{`${data.title}`}</NavLink>
                               </TooltipTrigger>
                               <TooltipContent className="p-0 text-start w-[500px]">
                                 <div className="bg-black w-full">
                                   <p className="font-semibold text-white p-2">{`${data.title}`}</p>
                                 </div>
-                                <div className="p-2 mt-2">
+                                <div className="p-1">
                                   <p>
                                     {data.synopsis.length > 200
                                       ? `${data.synopsis.substring(0, 200)}...`
                                       : `${data.synopsis}`}
+                                    <NavLink
+                                      to={`/detailsanime/${data.mal_id}`}
+                                      className="text-sky-500"
+                                    >
+                                      read more
+                                    </NavLink>
                                   </p>
+                                  <br></br>
                                   <p>
                                     Genres:{" "}
                                     {`${data.genres.map((genre) => {

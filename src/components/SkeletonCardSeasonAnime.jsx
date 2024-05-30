@@ -13,7 +13,7 @@ const SkeletonCardSeasonAnime = () => {
       <h1 className="text-lg font-semibold p-4 text-center">This Season</h1>
       <div className="w-full h-full grid lg:grid-cols-3 md:grid-cols-2 gap-3">
         {[...new Array(24)].map((_, index) => (
-          <div className="shadow-sm h-[370px]" key={index}>
+          <div className="shadow-sm h-[400px]" key={index}>
             <Card className="h-full">
               <CardHeader className="h-[20%] p-4 text-center">
                 <CardTitle>
