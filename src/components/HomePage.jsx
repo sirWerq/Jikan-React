@@ -30,10 +30,13 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
-import img1 from "./../assets/1.png";
+import img1 from "./../assets/1.jpg";
 import img2 from "./../assets/2.jpg";
+import img3 from "./../assets/3.jpg";
+import img4 from "./../assets/4.jpg";
+import img5 from "./../assets/5.jpeg";
 
-const imageList = [img1, img2];
+const imageList = [img1, img2, img3, img4, img5];
 
 import animeData from "../../services/animeData";
 import seasonData from "../../services/seasonData";
@@ -98,7 +101,7 @@ const HomePage = () => {
             <div>
               <Table>
                 <TableCaption className="font-semibold">
-                  <NavLink to="/topAnime?page=1">See More!</NavLink>
+                  <NavLink to="/topanime?page=1">See More!</NavLink>
                 </TableCaption>
                 <TableHeader>
                   <TableRow>
@@ -122,7 +125,11 @@ const HomePage = () => {
                           />
                           <TooltipProvider>
                             <Tooltip>
-                              <TooltipTrigger>{`${data.title}`}</TooltipTrigger>
+                              <TooltipTrigger>
+                                <NavLink
+                                  to={`detailsanime/${data.mal_id}`}
+                                >{`${data.title}`}</NavLink>
+                              </TooltipTrigger>
                               <TooltipContent className="p-0 text-start w-[500px]">
                                 <div className="bg-black w-full">
                                   <p className="font-semibold text-white p-2">{`${data.title}`}</p>
@@ -170,7 +177,12 @@ const HomePage = () => {
                 <div className="shadow-sm h-[370px]" key={index}>
                   <Card className="h-full">
                     <CardHeader className="h-[20%] p-4 text-center">
-                      <CardTitle>{`${anime.title}`}</CardTitle>
+                      <CardTitle>
+                        {" "}
+                        <NavLink
+                          to={`detailsanime/${anime.mal_id}`}
+                        >{`${anime.title}`}</NavLink>
+                      </CardTitle>
                     </CardHeader>
                     <div className="flex h-[60%]">
                       <CardContent className="flex-1 w-full">
@@ -203,7 +215,7 @@ const HomePage = () => {
               ))}
             </div>
             <div className="flex justify-center items-center p-2">
-              <NavLink to="/seasonAnime">See More!</NavLink>
+              <NavLink to="/seasonanime?page=1">See More!</NavLink>
             </div>
           </div>
         )}

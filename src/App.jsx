@@ -4,15 +4,19 @@ import HomePage from "./components/HomePage";
 import Error from "./components/Error";
 import TopAnime from "./components/TopAnime";
 import SeasonAnime from "./components/SeasonAnime";
+import DetailsAnime from "./components/DetailsAnime";
+import SearchPage from "./components/SearchPage";
 
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />}>
-          <Route path="home?" element={<HomePage />} />
-          <Route path="topAnime" element={<TopAnime />} />
-          <Route path="seasonAnime" element={<SeasonAnime />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="topanime" element={<TopAnime />} />
+          <Route path="seasonanime" element={<SeasonAnime />} />
+          <Route path="detailsanime/:id" element={<DetailsAnime />} />
+          <Route path="search/:name" element={<SearchPage />} />
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>

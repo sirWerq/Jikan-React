@@ -16,7 +16,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import animeData from "../../services/animeData";
 
@@ -74,22 +74,22 @@ const TopAnime = () => {
           <div>
             <Table>
               <TableCaption className="font-semibold">
-                <Button variant="outline" size="icon">
-                  <div
+                <div className="w-full flex justify-center items-center">
+                  <Button
+                    variant="outline"
+                    size="icon"
                     onClick={handleDecrementClick}
-                    className="border h-full w-full flex justify-center items-center"
                   >
                     <ChevronLeft className="h-4 w-4" />
-                  </div>
-                </Button>
-                <Button variant="outline" size="icon">
-                  <div
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
                     onClick={handleIncrementClick}
-                    className="border h-full w-full flex justify-center items-center"
                   >
                     <ChevronRight className="h-4 w-4" />
-                  </div>
-                </Button>
+                  </Button>
+                </div>
               </TableCaption>
               <TableHeader>
                 <TableRow>
@@ -112,7 +112,12 @@ const TopAnime = () => {
                         />
                         <TooltipProvider>
                           <Tooltip>
-                            <TooltipTrigger>{`${data.title}`}</TooltipTrigger>
+                            <TooltipTrigger>
+                              {" "}
+                              <NavLink
+                                to={`/detailsanime/${data.mal_id}`}
+                              >{`${data.title}`}</NavLink>
+                            </TooltipTrigger>
                             <TooltipContent className="p-0 text-start w-[500px]">
                               <div className="bg-black w-full">
                                 <p className="font-semibold text-white p-2">{`${data.title}`}</p>
@@ -122,14 +127,20 @@ const TopAnime = () => {
                                   {data.synopsis.length > 200
                                     ? `${data.synopsis.substring(0, 200)}...`
                                     : `${data.synopsis}`}
+                                  <NavLink
+                                    to={`/detailsanime/${data.mal_id}`}
+                                    className="text-sky-500"
+                                  >
+                                    read more
+                                  </NavLink>
                                 </p>
+                                <br></br>
                                 <p>
                                   Genres:{" "}
                                   {`${data.genres.map((genre) => {
                                     return genre.name;
                                   })}`}
                                 </p>
-                                <br></br>
                                 <p>Status: {`${data.status}`}</p>
                                 <p>Type: {`${data.type}`}</p>
                                 <p>Source: {`${data.source}`}</p>
