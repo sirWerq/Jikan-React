@@ -4,7 +4,7 @@ const SkeletonSearch = () => {
   return (
     <div className="w-full h-full">
       <div className="p-2">
-        <h2 className="font-semibold border-b-2">search results: {name}</h2>
+        <Skeleton className="h-4 w-[250px]" />
       </div>
 
       {[...new Array(10)].map((anime, index) => (
