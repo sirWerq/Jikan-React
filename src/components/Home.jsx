@@ -12,7 +12,7 @@ const Home = () => {
   };
 
   const handleSearch = (e) => {
-    e.preventDefault;
+    e.preventDefault();
     navigate(`/search/${searchAnime}`);
   };
 
