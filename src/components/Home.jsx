@@ -16,6 +16,25 @@ const Home = () => {
     navigate(`/search/${searchAnime}`);
   };
 
+  const currentDate = new Date();
+  const currentMonthIndex = currentDate.getMonth() + 1;
+  const year = currentDate.getFullYear();
+  const season_data = {
+    1: "winter",
+    2: "winter",
+    3: "spring",
+    4: "spring",
+    5: "spring",
+    6: "summer",
+    7: "summer",
+    8: "summer",
+    9: "fall",
+    10: "fall",
+    11: "fall",
+    12: "winter",
+  };
+  const season = season_data[currentMonthIndex];
+
   return (
     <>
       <nav className="relative w-full flex justify-center items-center border-b-2 bg-transparent backdrop-blur-sm z-10">
@@ -70,7 +89,7 @@ const Home = () => {
               Top Anime
             </NavLink>
             <NavLink
-              to="/seasonAnime?page=1"
+              to={`http://localhost:5173/seasonAnime/${year}/${season}`}
               className={({ isActive }) =>
                 `p-3 text-center ${isActive ? "bg-stone-300" : ""}`
               }

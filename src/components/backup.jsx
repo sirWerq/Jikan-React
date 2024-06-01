@@ -8,23 +8,22 @@ import {
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
-import { useSearchParams, NavLink, useParams } from "react-router-dom";
-import getSpecificSeason from "../../services/getSpecificSeason";
+import { useSearchParams, NavLink } from "react-router-dom";
+import seasonData from "../../services/seasonData";
 import SkeletonCardSeasonAnime from "./SkeletonCardSeasonAnime";
 
-const SeasonAnime = () => {
+const alo = () => {
   const [seasonAnime, setSeasonAnime] = useState([]);
   const [paginationAnime, setPaginationAnime] = useState([]);
   const [parameter, setParameter] = useSearchParams();
   const [loading, setLoading] = useState(true);
   const page = parseInt(parameter.get("page")) || 1;
-  const { year, season } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await getSpecificSeason(year, season);
+        const res = await seasonData(page, 24);
         setSeasonAnime(res.data);
         setPaginationAnime(res.pagination);
       } catch (err) {
@@ -35,7 +34,7 @@ const SeasonAnime = () => {
     };
 
     fetchData();
-  }, [page, season, year]);
+  }, [page]);
 
   const handleIncrementClick = () => {
     if (paginationAnime.has_next_page) {
@@ -61,10 +60,6 @@ const SeasonAnime = () => {
         <SkeletonCardSeasonAnime />
       ) : (
         <div className="mt-3 border rounded-md p-2 shadow-md">
-          <NavLink to={`/seasonanime/year/season`}>Winter 2024</NavLink>
-          <NavLink to={`/seasonanime/year/season`}>Spring 2024</NavLink>
-          <NavLink to={`/seasonanime/year/season`}>Summer 2024</NavLink>
-          <NavLink to={`/seasonanime/year/season`}>Fall 2024</NavLink>
           <h1 className="text-lg font-semibold p-4 text-center">This Season</h1>
           <div className="w-full h-full grid lg:grid-cols-3 md:grid-cols-2 gap-3">
             {seasonAnime.map((anime, index) => (
@@ -130,4 +125,4 @@ const SeasonAnime = () => {
   );
 };
 
-export default SeasonAnime;
+export default alo;

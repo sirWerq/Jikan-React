@@ -14,7 +14,7 @@ const App = () => {
         <Route path="/" element={<Home />}>
           <Route path="/" element={<HomePage />} />
           <Route path="topanime" element={<TopAnime />} />
-          <Route path="seasonanime" element={<SeasonAnime />} />
+          <Route path="seasonanime/:year/:season" element={<SeasonAnime />} />
           <Route path="detailsanime/:id" element={<DetailsAnime />} />
           <Route path="search/:name" element={<SearchPage />} />
         </Route>
