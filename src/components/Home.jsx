@@ -24,6 +24,16 @@ const Home = () => {
             <span>Rifqx</span>
             <span>Amia</span>
           </div>
+          <div className="block md:order-3">
+            <form onSubmit={handleSearch}>
+              <Input
+                type="text"
+                placeholder="Search"
+                value={searchAnime}
+                onChange={(e) => setSearchAnime(e.target.value)}
+              />
+            </form>
+          </div>
           <div
             onClick={handleToggle}
             className={`${
@@ -34,6 +44,7 @@ const Home = () => {
             <span className="hamburger-icon transition ease-in-out duration-300"></span>
             <span className="hamburger-icon origin-bottom-left transition ease-in-out duration-300"></span>
           </div>
+
           <div
             className={`${
               toggleHamburger ? "block" : "hidden"
@@ -63,16 +74,6 @@ const Home = () => {
             >
               Season
             </NavLink>
-          </div>
-          <div className="hidden md:block">
-            <form onSubmit={handleSearch}>
-              <Input
-                type="text"
-                placeholder="Search"
-                value={searchAnime}
-                onChange={(e) => setSearchAnime(e.target.value)}
-              />
-            </form>
           </div>
         </div>
       </nav>
