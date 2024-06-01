@@ -20,10 +20,13 @@ const Home = () => {
     <>
       <nav className="relative w-full flex justify-center items-center border-b-2 bg-transparent backdrop-blur-sm z-10">
         <div className="flex items-center justify-between p-2 container">
-          <div className="text-lg font-semibold md:text-xl text-center">
+          <NavLink
+            to="/"
+            className="text-lg font-semibold md:text-xl text-center"
+          >
             <span>Rifqx</span>
             <span>Amia</span>
-          </div>
+          </NavLink>
           <div className="block md:order-3">
             <form onSubmit={handleSearch}>
               <Input
