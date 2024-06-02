@@ -9,8 +9,16 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const SkeletonCardSeasonAnime = () => {
   return (
-    <div className="mt-3 border rounded-md p-2 shadow-md">
-      <h1 className="text-lg font-semibold p-4 text-center">This Season</h1>
+    <div className="mt-3 border rounded-md shadow-md">
+      <div className="flex justify-around mb-4">
+        <Skeleton className="h-4 w-[200px]" />
+        <Skeleton className="h-4 w-[200px]" />
+        <Skeleton className="h-4 w-[200px]" />
+        <Skeleton className="h-4 w-[200px]" />
+      </div>
+      <div className="text-lg font-semibold p-4 flex justify-center">
+        <Skeleton className="h-4 w-[250px] " />
+      </div>
       <div className="w-full h-full grid lg:grid-cols-3 md:grid-cols-2 gap-3">
         {[...new Array(24)].map((_, index) => (
           <div className="shadow-sm h-[400px]" key={index}>

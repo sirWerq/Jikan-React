@@ -68,7 +68,7 @@ const TopAnime = () => {
     <>
       {loading ? (
         <SkeletonTabelTopAnime />
-      ) : (
+      ) : page <= paginationAnime.last_visible_page ? (
         <div className="mt-3 border rounded-md p-2 shadow-md">
           <h1 className="text-lg font-semibold p-4">Top Anime</h1>
           <div>
@@ -161,6 +161,8 @@ const TopAnime = () => {
             </Table>
           </div>
         </div>
+      ) : (
+        <p>data error</p>
       )}
     </>
   );

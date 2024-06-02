@@ -44,6 +44,25 @@ import seasonData from "../../services/seasonData";
 import SkeletonTabelHome from "./SkeletonTabelHome";
 import SkeletonCardHome from "./SkeletonCardHome";
 
+const currentDate = new Date();
+const currentMonthIndex = currentDate.getMonth() + 1;
+const year = currentDate.getFullYear();
+const season_data = {
+  1: "winter",
+  2: "winter",
+  3: "spring",
+  4: "spring",
+  5: "spring",
+  6: "summer",
+  7: "summer",
+  8: "summer",
+  9: "fall",
+  10: "fall",
+  11: "fall",
+  12: "winter",
+};
+const season = season_data[currentMonthIndex];
+
 const HomePage = () => {
   const [topAnime, setTopAnime] = useState([]);
   const [seasonAnime, setSeasonAnime] = useState([]);
@@ -223,7 +242,11 @@ const HomePage = () => {
               ))}
             </div>
             <div className="flex justify-center items-center p-2">
-              <NavLink to="/seasonanime?page=1">See More!</NavLink>
+              <NavLink
+                to={`http://localhost:5173/seasonAnime/${year}/${season}`}
+              >
+                See More!
+              </NavLink>
             </div>
           </div>
         )}

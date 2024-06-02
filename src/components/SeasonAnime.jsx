@@ -20,11 +20,36 @@ const SeasonAnime = () => {
   const page = parseInt(parameter.get("page")) || 1;
   const { year, season } = useParams();
 
+  function getLeftRightButtonSeason(month, season, year) {
+    const seasonData = ["winter", "spring", "summer", "fall"];
+    let right = {};
+    const currIndex = seasonData.indexOf(season);
+    let left = {};
+
+    if (currIndex === 0) {
+      left = { fall: parseInt(year) - 1 };
+    } else {
+      left = { [seasonData[currIndex - 1]]: parseInt(year) };
+    }
+
+    for (let i = currIndex + 1; i < currIndex + 3; i++) {
+      let currYear = parseInt(year);
+      let index = i;
+      if (index > 3) {
+        index -= 4;
+        currYear += 1;
+      }
+      right[seasonData[index]] = currYear;
+    }
+
+    return [left, right];
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await getSpecificSeason(year, season);
+        const res = await getSpecificSeason(year, season, page);
         setSeasonAnime(res.data);
         setPaginationAnime(res.pagination);
       } catch (err) {
@@ -55,43 +80,69 @@ const SeasonAnime = () => {
     }
   };
 
+  const currentMonth = new Date().getMonth() + 1;
+  const [left, right] = getLeftRightButtonSeason(currentMonth, season, year);
+  const leftSeason = Object.keys(left)[0];
+  const leftYear = left[leftSeason];
+  const rightSeasons = Object.keys(right);
+  const rightYears = Object.values(right);
+
   return (
     <>
       {loading ? (
         <SkeletonCardSeasonAnime />
+      ) : year < 1917 || year > 2024 ? (
+        <p>data error</p>
       ) : (
         <div className="mt-3 border rounded-md p-2 shadow-md">
-          <NavLink to={`/seasonanime/year/season`}>Winter 2024</NavLink>
-          <NavLink to={`/seasonanime/year/season`}>Spring 2024</NavLink>
-          <NavLink to={`/seasonanime/year/season`}>Summer 2024</NavLink>
-          <NavLink to={`/seasonanime/year/season`}>Fall 2024</NavLink>
-          <h1 className="text-lg font-semibold p-4 text-center">This Season</h1>
+          <div className="flex justify-around mb-4">
+            <NavLink to={`/seasonanime/${leftYear}/${leftSeason}`}>
+              {leftSeason.charAt(0).toUpperCase() + leftSeason.slice(1)}{" "}
+              {leftYear}
+            </NavLink>
+            <NavLink to={`/seasonanime/${year}/${season}`}>
+              {season.charAt(0).toUpperCase() + season.slice(1)} {year}
+            </NavLink>
+            <NavLink to={`/seasonanime/${rightYears[0]}/${rightSeasons[0]}`}>
+              {rightSeasons[0].charAt(0).toUpperCase() +
+                rightSeasons[0].slice(1)}{" "}
+              {rightYears[0]}
+            </NavLink>
+            <NavLink to={`/seasonanime/${rightYears[1]}/${rightSeasons[1]}`}>
+              {rightSeasons[1].charAt(0).toUpperCase() +
+                rightSeasons[1].slice(1)}{" "}
+              {rightYears[1]}
+            </NavLink>
+          </div>
+          <h1 className="text-lg font-semibold p-4 text-center">
+            Season: {season} {year}
+          </h1>
           <div className="w-full h-full grid lg:grid-cols-3 md:grid-cols-2 gap-3">
             {seasonAnime.map((anime, index) => (
               <div className="shadow-sm h-[400px]" key={index}>
                 <Card className="h-full">
-                  <CardHeader className="h-[20%] p-4 text-center">
-                    <CardTitle className="hover:overflow-auto overflow-hidden">
-                      <NavLink
-                        to={`/detailsanime/${anime.mal_id}`}
-                      >{`${anime.title}`}</NavLink>
+                  <CardHeader className="p-4 flex justify-center items-center text-center h-[30%]">
+                    <CardTitle>
+                      <NavLink to={`/detailsanime/${anime.mal_id}`}>
+                        {anime.title}
+                      </NavLink>
                     </CardTitle>
                   </CardHeader>
-                  <div className="flex h-[60%]">
+                  <div className="flex h-[50%]">
                     <CardContent className="flex-1 w-full">
                       <img
-                        src={`${anime.images.webp.image_url}`}
-                        alt={`${anime.title}`}
+                        src={anime.images.webp.image_url}
+                        alt={anime.title}
                         className="h-[200px] w-[200px] rounded-md"
                       />
                     </CardContent>
                     <CardContent className="flex-[2] hover:overflow-auto overflow-hidden">
-                      <p>Synopsis: {`${anime.synopsis}`}</p>
+                      <p>Synopsis: {anime.synopsis}</p>
                     </CardContent>
                   </div>
-                  <div className="flex justify-center items-center mt-4">
+                  <div className="flex justify-center items-center mt-4 h-[20%]">
                     <CardFooter>
-                      <p>⭐: {`${anime.score}`}</p>
+                      <p>⭐: {anime.score}</p>
                     </CardFooter>
                     <CardFooter>
                       <p>
