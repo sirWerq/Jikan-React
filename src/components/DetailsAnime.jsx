@@ -116,7 +116,7 @@ const DetailsAnime = () => {
                 </div>
               </div>
               <div className="flex flex-col gap-3">
-                <div className="border-y-2 flex items-center justify-center gap-24 p-10 rounded-md">
+                <div className="border-y-2 flex items-center flex-wrap justify-center gap-24 p-10 rounded-md">
                   <div>
                     <p className="bg-slate-200 px-3">Score</p>
                     <p className="text-center">#{animeData.score}</p>
