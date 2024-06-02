@@ -92,7 +92,7 @@ const SeasonAnime = () => {
       {loading ? (
         <SkeletonCardSeasonAnime />
       ) : year < 1917 || year > 2024 ? (
-        <p>data error</p>
+        <p>Anime data for this season is still empty, please back</p>
       ) : (
         <div className="mt-3 border rounded-md p-2 shadow-md">
           <div className="flex justify-around mb-4">
