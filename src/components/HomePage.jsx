@@ -242,11 +242,7 @@ const HomePage = () => {
               ))}
             </div>
             <div className="flex justify-center items-center p-2">
-              <NavLink
-                to={`http://localhost:5173/seasonAnime/${year}/${season}`}
-              >
-                See More!
-              </NavLink>
+              <NavLink to={`seasonanime/${year}/${season}`}>See More!</NavLink>
             </div>
           </div>
         )}

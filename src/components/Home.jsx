@@ -81,7 +81,7 @@ const Home = () => {
               Home
             </NavLink>
             <NavLink
-              to="/topAnime?page=1"
+              to="/topanime?page=1"
               className={({ isActive }) =>
                 `p-3 text-center ${isActive ? "bg-stone-300" : ""}`
               }
@@ -89,7 +89,7 @@ const Home = () => {
               Top Anime
             </NavLink>
             <NavLink
-              to={`/seasonAnime/${year}/${season}`}
+              to={`/seasonanime/${year}/${season}`}
               className={({ isActive }) =>
                 `p-3 text-center ${isActive ? "bg-stone-300" : ""}`
               }
